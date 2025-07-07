@@ -31,7 +31,11 @@
         [disabled]="showResult"
       />
 
-      <button *ngIf="!showResult" type="submit" [disabled]="showResult">
+      <button
+        *ngIf="!showResult"
+        type="submit"
+        [disabled]="showResult || loading"
+      >
         Consultar
       </button>
     </form>

@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+
+export interface Socio {
+  ESTADO: boolean;
+  CEDULA: string;
+  NOMBRE: string;
+  RECINTO: string;
+  JUNTA: number | string;
+  DIRECCION: string;
+  PROVINCIA: string;
+  CANTON: string;
+  [key: string]: unknown;
+}
 
 @Component({
   selector: 'app-root',
@@ -12,11 +25,11 @@ export class AppComponent {
   cedula = '';
   showResult = false;
   inputError: string | null = null;
-  baseSocios: { [key: string]: any } = {};
-
-  private sociosDict: Record<string, any> = {};
+  loading = false;
 
   result: any = {};
+
+  constructor(private recaptchaV3: ReCaptchaV3Service) {}
 
   consultar(cedula: string): void {
     if (!cedula || cedula.trim() === '') {
@@ -25,43 +38,58 @@ export class AppComponent {
     }
 
     this.inputError = null;
+    this.loading = true;
+    this.recaptchaV3.execute('consulta').subscribe({
+      next: async (token) => {
+        this.loading = false;
 
-    const socio = this.sociosDict[cedula.trim()];
+        const response = fetch('http://localhost:3000/socios/consulta', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cedula: cedula.trim(), token: token }),
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then((data) => {
+            return data;
+          })
+          .catch((err) => {
+            console.error(err);
+            return null;
+          });
 
-    if (!socio) {
-      alert('Socio no encontrado');
-      return;
-    }
+        const socio = (await response) as Socio;
 
-    this.cedula = cedula;
+        if (!socio.ESTADO) {
+          this.inputError = 'Socio no encontrado';
+          return;
+        }
 
-    this.result = {
-      nombre: socio.APELLIDOSYNOMBRES,
-      cedula: socio.IDENTIFICACION,
-      recinto: socio.RECINTO,
-      junta: String(socio.JUNTA),
-      direccion: socio.DIRECCION,
-      provincia: socio.PROVINCIA,
-      canton: socio.CANTON,
-    };
+        this.cedula = cedula;
 
-    this.showResult = true;
+        this.result = {
+          nombre: socio.NOMBRE,
+          cedula: socio.CEDULA,
+          recinto: socio.RECINTO,
+          junta: String(socio.JUNTA),
+          direccion: socio.DIRECCION,
+          provincia: socio.PROVINCIA,
+          canton: socio.CANTON,
+        };
+        this.showResult = true;
+      },
+      error: () => {
+        this.loading = false;
+        this.inputError = 'Error al verificar reCAPTCHA. Intente nuevamente';
+      },
+    });
   }
 
   nuevaConsulta(): void {
     this.showResult = false;
     this.cedula = '';
     this.inputError = null;
-  }
-
-  ngOnInit() {
-    fetch('/assets/socios.json')
-      .then((res) => res.json())
-      .then((data: any[]) => {
-        data.forEach((s) => {
-          this.sociosDict[s.IDENTIFICACION] = s;
-        });
-      })
-      .catch((err) => console.error('Error cargando socios.json', err));
   }
 }
