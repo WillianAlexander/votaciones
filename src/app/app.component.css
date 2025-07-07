@@ -125,6 +125,17 @@ body {
     min-width: 70%;
     font-size: 0.9rem;
   }
+
+  .footer {
+    gap: 0.1rem !important;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    font-size: 0.7rem !important;
+  }
+
+  .footer-logo {
+    width: 100px !important;
+  }
 }
 
 /* --- Resultados --- */
@@ -221,9 +232,60 @@ section hr {
   }
 }
 
+@media (max-width: 1000px) {
+  .result-container {
+    gap: 1.5rem;
+  }
+
+  .left-info {
+    font-size: 0.8rem;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+  }
+
+  .right-info {
+    font-size: 0.8rem;
+    padding: 1rem;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+  }
+
+  section hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .error {
+    color: #d93025;
+    font-size: 0.75rem !important;
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
 /* mensaje de error */
 .error {
   color: #d93025;
   font-size: 0.85rem;
   margin-top: 2rem;
+}
+
+/* footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.footer-logo {
+  width: 130px;
 }
