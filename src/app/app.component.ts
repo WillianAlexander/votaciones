@@ -43,7 +43,7 @@ export class AppComponent {
       next: async (token) => {
         this.loading = false;
 
-        const response = fetch('http://localhost:3000/socios/consulta', {
+        const response = fetch('http://192.168.112.131:3000/socios/consulta', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ cedula: cedula.trim(), token: token }),
@@ -56,7 +56,6 @@ export class AppComponent {
             return data;
           })
           .catch((err) => {
-            console.error(err);
             return null;
           });
 
