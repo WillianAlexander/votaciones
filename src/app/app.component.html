@@ -1,0 +1,79 @@
+<!-- Página de consulta de lugar de votación -->
+<div class="page-container">
+  <!-- Encabezado -->
+  <img
+    src="https://coopgualaquiza.fin.ec/wp-content/uploads/2025/06/LOGO-1024x367.png"
+    alt="Elecciones Asamblea General 2025 - 2029"
+    class="header-image"
+  />
+
+  <!-- Tarjeta principal -->
+  <section class="card">
+    <header class="card-title">CONSULTE SU LUGAR DE VOTACIÓN</header>
+
+    <p class="card-description">
+      Conozca el lugar asignado para ejercer su derecho al voto en las próximas
+      elecciones de representantes a la Asamblea General.
+    </p>
+
+    <form
+      class="consulta-form"
+      (submit)="consultar(cedulaInput.value); $event.preventDefault()"
+    >
+      <label for="cedula">Cédula:</label>
+      <input
+        type="text"
+        id="cedula"
+        #cedulaInput
+        required
+        (input)="inputError = null"
+        [value]="cedula"
+        [disabled]="showResult"
+      />
+
+      <button *ngIf="!showResult" type="submit" [disabled]="showResult">
+        Consultar
+      </button>
+    </form>
+    <p class="error" *ngIf="inputError">{{ inputError }}</p>
+
+    <!-- Resultado -->
+    <hr *ngIf="showResult" />
+
+    <div *ngIf="showResult" class="result-container">
+      <div class="left-info">
+        <p class="left-info-label">Nombres y Apellidos:</p>
+        <p>{{ result.nombre }}</p>
+        <p class="left-info-label">C.I.:</p>
+        <p>{{ result.cedula }}</p>
+      </div>
+
+      <div class="right-info">
+        <p>
+          <span class="right-info-label">Recinto:</span> {{ result.recinto }}
+        </p>
+        <p><span class="right-info-label">Junta:</span> {{ result.junta }}</p>
+        <p>
+          <span class="right-info-label">Dirección:</span>
+          {{ result.direccion }}
+        </p>
+        <p>
+          <span class="right-info-label">Provincia:</span>
+          {{ result.provincia }}
+        </p>
+        <p><span class="right-info-label">Cantón:</span> {{ result.canton }}</p>
+      </div>
+    </div>
+
+    <button
+      *ngIf="showResult"
+      class="btn-secondary"
+      type="button"
+      (click)="nuevaConsulta()"
+    >
+      Nueva Consulta
+    </button>
+  </section>
+</div>
+
+<router-outlet></router-outlet>

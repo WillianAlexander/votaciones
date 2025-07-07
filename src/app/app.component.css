@@ -1,0 +1,229 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f5f6fa;
+}
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.header-image {
+  width: 350px;
+  max-width: 100%;
+  margin: 2rem auto 3rem auto;
+  display: block;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 35px;
+  padding: 4.5rem 1.5rem;
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card label {
+  color: #555;
+}
+
+.card-title {
+  background-color: #2f7b3a; /* verde principal */
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 24px;
+  padding: 0.75rem 14.5rem;
+  font-size: 1rem;
+  margin-top: -4rem;
+  display: inline-block;
+}
+
+.card-description {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  color: #555;
+  line-height: 1.4;
+  margin-left: 6rem;
+  margin-right: 6rem;
+  text-align: justify;
+  font-size: 0.8rem;
+}
+
+.consulta-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.consulta-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.consulta-form input[type="text"] {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 260px;
+}
+
+.consulta-form button {
+  background-color: #1d6b2a;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+.consulta-form button:hover {
+  background-color: #15521f;
+}
+
+@media (max-width: 500px) {
+  .header-image {
+    width: 250px;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    padding: 2rem 1rem;
+    border-radius: 16px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    padding: 0.75rem 2rem;
+    margin-top: -0.75rem;
+  }
+
+  .card-description {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .consulta-form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .consulta-form input[type="text"] {
+    min-width: 70%;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- Resultados --- */
+.result-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+section hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 3.5rem;
+  margin-right: 3.5rem;
+}
+
+.left-info,
+.right-info {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.left-info {
+  flex: 1 1 260px;
+  text-align: left;
+  margin-left: 5.5rem;
+}
+
+.right-info {
+  flex: 1 1 260px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  margin-right: 5.5rem;
+}
+
+.left-info-label,
+.right-info-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.btn-secondary {
+  margin-top: 2.5rem;
+  background-color: #1d6b2a;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background-color: #15521f;
+}
+
+@media (max-width: 500px) {
+  .result-container {
+    /* flex-direction: column; */
+    gap: 1.5rem;
+  }
+
+  .left-info {
+    font-size: 0.8rem;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+  }
+
+  .right-info {
+    font-size: 0.8rem;
+    padding: 1rem;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+  }
+
+  section hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .error {
+    color: #d93025;
+    font-size: 0.75rem !important;
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+/* mensaje de error */
+.error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+}
